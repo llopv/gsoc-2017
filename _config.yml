@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "SwellRT GSoC-12,017: E2EE"
+title: "GSoC-2017: Wave E2E-Encryption"
 description: >
   Google Summer of Code project to provide SwellRT Operational Transformations
   with End-to-End Encryption.
