@@ -22,20 +22,20 @@ the default options. Once imported we should see three folders in the Package
 Explorer: `incubator-wave` (root directory), `pst` (a dependency), and `wave`
 (the code).
 
-![Path build]({{ site.url }}/assets/ide-0.png)
+![Path build]({{ site.url }}/assets/img/ide-0.png)
 
 Now, we may want to disable the option _Project > Build automatically_.
 
 Right-clicking on `wave-incubator` folder, and then _Build Path > Configure
 Build Path..._, we should add the following folders in the different tabs:
 
-![Path build]({{ site.url }}/assets/ide-1.png)
+![Path build]({{ site.url }}/assets/img/ide-1.png)
 
-![Path build]({{ site.url }}/assets/ide-2.png)
+![Path build]({{ site.url }}/assets/img/ide-2.png)
 
-![Path build]({{ site.url }}/assets/ide-3.png)
+![Path build]({{ site.url }}/assets/img/ide-3.png)
 
-![Path build]({{ site.url }}/assets/ide-4.png)
+![Path build]({{ site.url }}/assets/img/ide-4.png)
 
 Now we can check everything is working with _Project > Build Project_.
 
