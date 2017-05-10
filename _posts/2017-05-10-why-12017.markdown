@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "Why do we say we are in 12,017?"
+date:   2017-05-10 13:07:03 +0200
+categories: geek-stuff
+---
+
+Because we began to build our own world ~12,000 years ago. This is our history.
+
+{% youtube czgOWmtGVGs %}
