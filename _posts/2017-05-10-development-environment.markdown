@@ -6,7 +6,7 @@ categories: ide setup
 ---
 
 We begin by downloading the code of WIAB (Wave in a Box). [Apache Wave
-documetnation][1] tells us to download it using git:
+documentation][1] tells us to download it using git:
 
 ```sh
 $ git clone https://git-wip-us.apache.org/repos/asf/incubator-wave.git
