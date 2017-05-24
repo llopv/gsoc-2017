@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Operational Transformation example"
+title:  "Example on Operational Transformations"
 date:   2017-05-23 23:40:03 +0200
 categories: ot
 ---
@@ -11,39 +11,31 @@ In this article, we use the last example of [Code Commit's blog post][1] in orde
 
 Client and Server initial revision is 0, and the document state is empty.
 
-Client perspective:
+## Client perspective
 
 * Alice types "Wave".
-* Client sends _InsertText "Wave" @1, rev 0._ **(a)**. Document state = "Wave".
+* Client sends `InsertCharacters("Wave");`, rev 0. **(a)**. Document state = "Wave".
 * Alice types "!".
-* Client holds _InsertText "!" @5, rev 1._ **(b)**. Document state = "Wave!".
-* Client receives _InsertText "World" @1, rev 0._ **(c)**
-* Client applies _InsertText "World" @1, rev 2._ **(c')**. Document state = "WorldWave!
+* Client holds `retain(4); InsertCharacters("!!");`, rev 1. **(b)**. Document state = "Wave!!".
+* Client receives `InsertCharacters("World");`, rev 0. **(c)**
+* Client applies `InsertCharacters("World"); retain(6);`, rev 2. **(c')**. Document state = "WorldWave!!
 * Alice deletes "World".
-* Client applies _DeleteText "World" @1, rev 3._ **(e)**. Document state = "Wave!"
-* Client holds _InsertText "!" @5;DeleteText "World" @1, rev 4_. **((e*b')')**
-* Client receives _InsertText "Hello " @1, rev 1._ **(d)**.
-* Client applies _InsertText "Hello " @1, rev 4._ **(d')**. Document state = "Hello Wave!".
-* Client receives ACK _InsertText "Wave" @12, rev 2._ **(a')**.
-* Client sends _InsertText "!" @5;DeleteText "World" @1, rev 4_. **((e*b')')**
+* Client applies `DeleteCharacters("World"); retain(6)` , rev 3. **(e)**. Document state = "Wave!!"
+* Client holds `DeleteCharacters("World"); retain(4); InsertCharacters("!!");`, rev 4. **((e⦁b')')**
+* Client receives `InsertCharacters("Hello "); retain(5);`, rev 1. **(d)**.
+* Client applies `InsertCharacters("Hello "); retain(6);`, rev 4. **(d')**. Document state = "Hello Wave!!".
+* Client receives ACK `InsertCharacters("Wave");`, rev 2. **(a')**.
+* Client sends `DeleteCharacters("World"); retain(4); InsertCharacters("!!");`, rev 4. **(e⦁b')**
 
-Server perspective:
+## Server perspective
 
-* Bob sends _InsertText "World" @1, rev 0._ **(c)**
-* Server applies it as it is. Revision = 1. Document state = "World".
-* Bob sends _InsertText "Hello " @1, rev 1._ **(d)**
-* Server applies it as it is. Revision = 2. Document state = "Hello World".
-* Alice sends _InsertText "Wave" @1, rev 0._ **(a)**
-* Server applies _InsertText "Wave" @12, rev 2._ **(a')**. Revision = 3. Document State = "Hello WorldWave".
-* Server receives _InsertText "!"; DeleteText "World", rev ?_ **((e*b')')**
-* Server applies it as it is. Revision = 4. Document State = "Hello Wave!"
-
-Delta operations:
-
-* **(a)**: InsertText "Wave" @1, `InsertCharacters('Wave');`
-* **(b)**: InsertText "!" @1, `InsertCharacters('!');`
-* **(c)**: InsertText "World" @1, `InsertCharacters('World');`
-* **(d)**: InsertText "Hello " @1, `InsertCharacters('Hello ');`
-* **(e)**: DeleteText "World" @1, `DeleteCharacters('World');`
+* Bob sends `InsertCharacters("World");`, rev 0. **(c)**
+* Server applies it as it is. History = [c]. Document state = "World".
+* Bob sends `InsertCharacters("Hello "); retain(5);`, rev 1. **(d)**
+* Server applies it as it is. History = [c, d]. Document state = "Hello World".
+* Alice sends `InsertCharacters("Wave");`, rev 0. **(a)**
+* Server applies `retain(12); InsertCharacters("Wave");`, rev 2. **(a')**. History = [c, d, a']. Document State = "Hello WorldWave".
+* Server receives `DeleteCharacters("World"); retain(4); InsertCharacters("!!");`, rev 4. **(e⦁b')**
+* Server applies `retain(6); DeleteCharacters("World"); retain(4); InsertCharacters("!!");`, rev 4. **((e⦁b')')**. History = [c, d, a', (e⦁b')']. Document State = "Hello Wave!!"
 
 [1]: http://www.codecommit.com/blog/java/understanding-and-applying-operational-transformation
