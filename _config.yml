@@ -17,7 +17,7 @@ title: "GSoC-2017: Wave E2E-Encryption"
 description: >
   Google Summer of Code project to provide SwellRT Operational Transformations
   with End-to-End Encryption.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "gsoc-2017" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 404ouch
 github_username:  llopv
