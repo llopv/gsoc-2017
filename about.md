@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Project abstract
-permalink: /about/
+permalink: /abstract/
 ---
 
 End-to-end encryption (E2EE) has been gaining relevance during the last years due to the increasing privacy concerns of users. Encrypting communications between the client and the server using SSL is not enough to protect users privacy, since data can be read in plaintext in the server, which is not trustworthy.
