@@ -2,7 +2,7 @@
 layout: post
 title:  "Setting up our environment"
 date:   2017-05-10 14:16:03 +0200
-categories: ide setup
+categories: ide setup code
 ---
 
 We begin by downloading the code of WIAB (Wave in a Box). [Apache Wave
