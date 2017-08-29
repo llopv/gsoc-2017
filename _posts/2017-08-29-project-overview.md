@@ -5,7 +5,7 @@ date:   2017-08-29 12:44:03 +0200
 categories: code
 ---
 
-<center><i>The code can be downloaded from <a href="https://github.com/llopv/incubator-wave/tree/gsoc-2017">this git branch</a> (compare <a href="https://github.com/llopv/incubator-wave/compare/800fbc87a0a0d1...gsoc-2017">changes</a>).</i></center>
+*The code can be downloaded from [this git branch][code] (compare [changes][changes]).*
 
 ## Synopsis
 [Apache Wave][wave] is a software framework for online real-time collaborative
@@ -99,3 +99,4 @@ work for this Summer, but we have had not enough time to develop this part.
 [encrypt-ot-1]: https://llopv.github.io/gsoc-2017/e2ee/2017/06/30/encrypt-ot-1.html
 [encrypt-ot-2]: https://llopv.github.io/gsoc-2017/e2ee/2017/08/31/encrypt-ot-2.html
 [walkthrough]: https://llopv.github.io/gsoc-2017/code/2017/08/31/code-walkthrough.html
+[changes]: https://github.com/llopv/incubator-wave/compare/800fbc87a0a0d1...gsoc-2017
