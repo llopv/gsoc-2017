@@ -36,6 +36,13 @@ style="position:absolute;width:100%;height:100%;left:0" allowfullscreen>
 To encrypt the messages we have used the algorithm AES-GCM from the WebCrypto
 API. We have used JsInterop bindings to call it from our Java classes.
 
+Messages are properly encrypted and decrypted when they are sent and received
+by the clients. The texts of a documents are also properly recovered from the
+server's snapshot. Everything seems to run smoothly, except for some annoying
+bugs that appear sparsely, and a serious user interface bug that prevents users
+that did not created the wave to decrypt its snapshot. My mentor and me think
+that we can fix them quickly, just after the program has ended.
+
 ## How to use it
 
 Running our modified version of Wave does not require any additional
