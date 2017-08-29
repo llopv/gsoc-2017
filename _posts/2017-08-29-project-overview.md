@@ -57,12 +57,33 @@ attached, after the wave identifier, separated by an exclamation mark (!).
 
 ![Encrypted Wave URL]({{ site.github.url }}/assets/img/over-2.png)
 
-
-### Temporary solution to decrypt waves
-
-<a href="(function(){let alg={name:'AES-GCM',length:256};let keyUsages=['encrypt','decrypt'];function base64ToBuffer(base64){let binary_string=window.atob(base64);let len=binary_string.length;let bytes=new Uint8Array(len);for(var i=0;i<len;i+=1){bytes[i]=binary_string.charCodeAt(i)}return bytes.buffer}let getCryptoKey=(key)=>{let keydata={kty:'oct',k:key,alg:'A256GCM',ext:true};return window.crypto.subtle.importKey('jwk',keydata,alg,false,keyUsages)}let decrypt=(key,msg)=>{msg=msg.split(';');let iv=base64ToBuffer(msg[0]);let data=base64ToBuffer(msg[1]);let additionalData=base64ToBuffer(msg[2]);let params={name:'AES-GCM',iv,additionalData};return window.crypto.subtle.decrypt(params,key,data).then(buffer=>{return new TextDecoder('utf8').decode(buffer)})}let onServerResponse=(json)=>{console.log(json);let texts={};getCryptoKey(key).then(k=>{key=k;let snapshot=json.snapshots[Object.keys(json.snapshots)[0]];Promise.all(Object.keys(snapshot.ciphertexts).map((c)=>{return decrypt(key,snapshot.ciphertexts[c]).then(t=>texts[c]=t)})).then(()=>{console.log(texts);let content='';let pieces=snapshot.pieces;console.log(pieces);for(let k of Object.keys(pieces)){console.log(JSON.stringify(pieces[k]));console.log(texts[pieces[k].opId].substring(pieces[k].offset,pieces[k].offset+pieces[k].len));content+=texts[pieces[k].opId].substring(pieces[k].offset,pieces[k].offset+pieces[k].len)}let i=0;document.querySelector('.document').innerHTML=document.querySelector('.document').innerHTML.split('').map(c=>{if(c=='*'/***/){return content.charAt(i++)}else{return c}}).join('')})})}let waveId=location.hash.substr(1).split('!')[0];let key=location.hash.substr(1).split('!')[1];let r=new XMLHttpRequest();r.open('GET','/crypto/snapshot/'+waveId+'/local.net/conv+root',true);r.onreadystatechange=function(){if(r.readyState!=4||r.status!=200){return}onServerResponse(JSON.parse(r.responseText))};r.send()})();">Decrypt wave</a>
+The user must preserve that URL (or at least the key part) in order to open the
+wave again in the future.
 
 ## Future work
+
+AES-GCM assures both confidentiality and integrity for the messages written by
+the legitimate users, but an attacker who has the control over the server can
+still do a lot of harm:
+
+* Only the text of a document is encrypted, but not other parts like the content
+of its hiperlinks, for example. We should extend the encryption beyond the
+inserted characters.
+* The authentication could also be extended to all the components, not only text
+ones. Also, as the [paper][paper] states that the history of a document should
+also be authenticaded (see appendix A.2).
+* It is unlikely to hide the structure and format of the document to the server,
+but we may be able to hide some more information, like user's typing traits.
+
+On the other hand, it is not convenient having users handling symmetric keys by
+themselves. Keys should be encrypted and stored in the server as user data. To
+do so, we should derive a key from the user's password using `pbkdf2` (available
+in the WebCrypto API), to encrypt all the keys a user generates or registers
+for her waves.
+
+The users could use public key cryptograpy in order to being able to invite each
+other to edit in a wave document. This feature were part of the original plan of
+work for this Summer, but we have had not enough time to develop this part.
 
 ## Relevant links
 * [List of commits][code]
