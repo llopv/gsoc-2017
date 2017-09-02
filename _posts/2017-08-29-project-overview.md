@@ -5,7 +5,7 @@ date:   2017-08-29 12:44:03 +0200
 categories: code
 ---
 
-*The code can be downloaded from [this git branch][code] (compare [changes][changes]).*
+*The code can be downloaded from [this git branch][code] (compare [changes][changes], my [commits][commits]).*
 
 ## Synopsis
 [Apache Wave][wave] is a software framework for online real-time collaborative
@@ -45,15 +45,16 @@ that we can fix them quickly, just after the program has ended.
 
 ## How to use it
 
-Running our modified version of Wave does not require any additional
-configuration, just use Gradle commands as usual. To compile the code and
-run the server use:
+Building our modified version of Wave does not require any additional
+configuration, just download the code from our [git branch][code] and use Gradle
+commands as usual, as it is stated in the Wave's [README][readme] file. To
+compile the code and run the server use:
 
 ```sh
 $ ./gradlew run
 ```
 
-And open the url http://localhost:9898/ with any browser. Once registered and
+Then, open the url http://localhost:9898/ with any browser. Once registered and
 logged in, use the "New Encrypted Wave" button to create a new encrypted wave.
 
 ![Encrypted Wave button]({{ site.github.url }}/assets/img/over-1.png)
@@ -93,7 +94,6 @@ other to edit in a wave document. This feature were part of the original plan of
 work for this Summer, but we have had not enough time to develop this part.
 
 ## Relevant links
-* [List of commits][code]
 * [How can Apache Wave Operational Transformations be encrypted? (Part 1)][encrypt-ot-1]
 * [How can Apache Wave Operational Transformations be encrypted? (Part 2)][encrypt-ot-2]
 * [Project code walkthrough][walkthrough]
@@ -103,7 +103,9 @@ work for this Summer, but we have had not enough time to develop this part.
 [ot]: https://en.wikipedia.org/wiki/Operational_transformation
 [paper]: http://www.tara.tcd.ie/bitstream/handle/2262/68179/paper.pdf;sequence=1
 [code]: https://github.com/llopv/incubator-wave/tree/gsoc-2017
+[commits]: https://github.com/llopv/incubator-wave/commits/gsoc-2017?author=llopv
 [encrypt-ot-1]: https://llopv.github.io/gsoc-2017/e2ee/2017/06/30/encrypt-ot-1.html
 [encrypt-ot-2]: https://llopv.github.io/gsoc-2017/e2ee/2017/08/31/encrypt-ot-2.html
 [walkthrough]: https://llopv.github.io/gsoc-2017/code/2017/08/31/code-walkthrough.html
 [changes]: https://github.com/llopv/incubator-wave/compare/800fbc87a0a0d1...gsoc-2017
+[readme]: https://github.com/llopv/incubator-wave/blob/gsoc-2017/README.md#build
